@@ -1,0 +1,22 @@
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /home/mguezuraga/Documents/Personal/Wallpaper/keyboards_altered.jpg fill
+
+# Devices
+set $display_left DP-3
+set $display_right DP-2
+set $display_laptop eDP-1
+set $display_home DP-1
+
+# Disable main laptop screen
+bindsym $mod+F7 output $display_laptop disable
+bindsym $mod+F8 output $display_laptop enable
+
+# Correct ordering, home, needs testing
+output $display_laptop pos 0,0
+output $display_home pos 1920,0
+
+#output $display_left pos 0,0
+#output $display_home pos 0,3440
+#output $display_right pos 1920,0
+#output $display_laptop pos 3840,0
+#output $display_laptop disable

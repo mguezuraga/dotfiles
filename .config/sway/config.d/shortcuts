@@ -1,0 +1,45 @@
+# Application shortcuts
+bindsym Alt+Shift+f exec notify-send 'Launching firefox' && firefox
+bindsym Alt+Shift+c exec notify-send 'Launching Codium' && /home/mguezuraga/Apps/VSCodium/codium
+
+# Ctrl + Alt + l locks
+bindsym Ctrl+Alt+l exec swaylock -c 000000
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym XF86AudioNext exec playerctl -p spotify next
+bindsym XF86AudioPrev exec playerctl -p spotify previous
+
+# Volume (requires pamixer)
+bindsym XF86AudioRaiseVolume exec pamixer --increase 2
+bindsym XF86AudioLowerVolume exec pamixer --decrease 2
+# Mute/Unmute mic
+bindsym $mod+m exec pactl set-source-mute 1 toggle
+
+## Screenshots
+# Capture all screens to clipboard
+bindsym $mod+Shift+p exec grim - | wl-copy
+# Capture the specified screen area to clipboard
+bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
+# Capture the specified screen area into a file
+bindsym $mod+Shift+s exec slurp | grim -g - ~/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+# Capture the focused monitor to clipboard
+# bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+
+# Kill clear notifications
+bindsym $mod+Shift+z exec makoctl dismiss --all
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+  bindsym l exec --no-startup-id $Locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "$mode_system"

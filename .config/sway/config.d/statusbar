@@ -1,0 +1,23 @@
+# SwayWM status bar configuration. For detailed information type "man sway-bar"
+# Author: Oscar Carballal Prego <oscar.carballal@protonmail.com>
+
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    position top
+#    status_command while ~/.config/sway/scripts/sway_bar.sh; do sleep 1; done
+#
+#    gaps 0 4 0 4
+#    font Ubuntu Mono 9
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#    }
+#}
+
+# waybar config is in ~/.config/waybar/config
+bar {
+    swaybar_command waybar
+    # swaybar_command swaybar
+}
